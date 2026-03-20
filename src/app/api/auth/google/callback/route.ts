@@ -23,6 +23,7 @@ interface GoogleUserInfo {
 }
 
 export async function GET(req: NextRequest) {
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL || process.env.BETTER_AUTH_URL || 'http://localhost:3000'
     try {
         const url = new URL(req.url)
         const code = url.searchParams.get('code')
@@ -35,7 +36,7 @@ export async function GET(req: NextRequest) {
 
         if (!code) {
             console.error('[OAuth Callback] No authorization code received')
-            return NextResponse.redirect(new URL('/login?error=no_code', req.url))
+            return NextResponse.redirect(new URL('/login?error=no_code', appUrl))
         }
 
         // Exchange code for tokens
@@ -55,7 +56,7 @@ export async function GET(req: NextRequest) {
         if (!tokenRes.ok) {
             const errText = await tokenRes.text()
             console.error('[OAuth Callback] Token exchange failed:', errText)
-            return NextResponse.redirect(new URL('/login?error=token_exchange', req.url))
+            return NextResponse.redirect(new URL('/login?error=token_exchange', appUrl))
         }
 
         const tokens: GoogleTokenResponse = await tokenRes.json()
@@ -68,7 +69,7 @@ export async function GET(req: NextRequest) {
 
         if (!userInfoRes.ok) {
             console.error('[OAuth Callback] Failed to fetch user info')
-            return NextResponse.redirect(new URL('/login?error=user_info', req.url))
+            return NextResponse.redirect(new URL('/login?error=user_info', appUrl))
         }
 
         const googleUser: GoogleUserInfo = await userInfoRes.json()
@@ -122,7 +123,7 @@ export async function GET(req: NextRequest) {
 
             if (insertError) {
                 console.error('[OAuth Callback] Failed to create user:', insertError)
-                return NextResponse.redirect(new URL('/login?error=create_user', req.url))
+                return NextResponse.redirect(new URL('/login?error=create_user', appUrl))
             }
 
             userId = newUser.id
@@ -146,14 +147,14 @@ export async function GET(req: NextRequest) {
 
         if (sessionError) {
             console.error('[OAuth Callback] Failed to create session:', sessionError)
-            return NextResponse.redirect(new URL('/login?error=session', req.url))
+            return NextResponse.redirect(new URL('/login?error=session', appUrl))
         }
 
         console.log('[OAuth Callback] Session created, redirecting...')
 
         // Set session cookie and redirect
         const redirectUrl = isNewUser ? '/onboarding' : '/dashboard'
-        const response = NextResponse.redirect(new URL(redirectUrl, req.url))
+        const response = NextResponse.redirect(new URL(redirectUrl, appUrl))
 
         response.cookies.set('session_token', sessionToken, {
             httpOnly: true,
@@ -184,6 +185,6 @@ export async function GET(req: NextRequest) {
 
     } catch (error) {
         console.error('[OAuth Callback] Unexpected error:', error)
-        return NextResponse.redirect(new URL('/login?error=callback', req.url))
+        return NextResponse.redirect(new URL('/login?error=callback', appUrl))
     }
 }
