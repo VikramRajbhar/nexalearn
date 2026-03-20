@@ -48,4 +48,7 @@ Build With KodeMaster AI Hackathon 2026
 SRM Institute of Science & Technology, Delhi-NCR
 
 ## 👨‍💻 Developer
-[Your Name] — BTech CS, SRM Delhi NCR
+Vikram Rajbhar — BTech CSIT, DGI
+Vishal Gupta — BTech CSIT, DGI
+Adarsh Dutta — BTech CSIT, DGI
+Nikhil Singh — BTech CSIT, DGI
