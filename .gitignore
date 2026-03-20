@@ -1,41 +1,102 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# ============================================
+# NEXALEARN .gitignore
+# ============================================
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
+# Dependencies
+node_modules/
+.npm
 
-# testing
-/coverage
+# Next.js
+.next/
+out/
+dist/
+build/
+build_output*.txt
+build_output*.log
 
-# next.js
-/.next/
-/out/
+# Environment variables - NEVER COMMIT
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*.local
 
-# production
-/build
-
-# misc
-.DS_Store
-*.pem
-
-# debug
+# Logs
+*.log
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
+server.log
+dev_server.log
+start.log
+/tmp/
 
-# env files (can opt-in for committing if needed)
-.env*
+# OS
+.DS_Store
+Thumbs.db
 
-# vercel
-.vercel
+# IDE
+.vscode/
+.idea/
+*.swp
 
-# typescript
+# TypeScript
 *.tsbuildinfo
 next-env.d.ts
+
+# Deployment
+.vercel
+.railway
+
+# Python
+venv/
+__pycache__/
+*.py
+*.pyc
+pyvenv.cfg
+
+# Agent and AI workspace
+.agent/
+.agents/
+.antigravity/
+agent-skills/
+AGENT.md
+
+# Internal summary docs
+PHASE1_SUMMARY.md
+PHASE2_SUMMARY.md
+PHASE3_SUMMARY.md
+PHASE4_SUMMARY.md
+PHASE5_SUMMARY.md
+PHASE6_SUMMARY.md
+PHASE7_SUMMARY.md
+PHASE8_SUMMARY.md
+PHASE9_SUMMARY.md
+THEME_SUMMARY.md
+AI_FEATURES_SUMMARY.md
+DEMO_READY_REPORT.md
+KNOWN_ISSUES.md
+TEST_REPORT.md
+*_SUMMARY.md
+
+# Test files
+test_*.py
+test_*.ts
+test_*.js
+test-*.ts
+test-results/
+tests/
+
+# Debug files
+check_redis.js
+get-demo-*.js
+recreate_*.ts
+recreate_*.js
+seed-script.ts
+login-error.png
+logout-stuck*.png
+
+# Database
+database/
+
+# Nested duplicate
+nexalearn/
