@@ -5,7 +5,7 @@
 Battle your way to mastery. Learn faster through competition.
 
 ## 🚀 Live Demo
-**URL:** [Add after deployment]
+URL: https://nexalearn-production.up.railway.app
 
 | Account | Email | Password |
 |---|---|---|
